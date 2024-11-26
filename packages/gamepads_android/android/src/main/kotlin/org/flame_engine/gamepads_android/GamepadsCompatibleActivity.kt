@@ -15,4 +15,5 @@ interface GamepadsCompatibleActivity {
     fun registerInputDeviceListener(listener: InputManager.InputDeviceListener, handler: Handler?)
     fun registerKeyEventHandler(handler: (KeyEvent) -> Boolean)
     fun registerMotionEventHandler(handler: (MotionEvent) -> Boolean)
+    fun registerBatteryEventHandler(handler: (InputDevice) -> Boolean)
 }

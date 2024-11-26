@@ -1,5 +1,7 @@
 package org.flame_engine.gamepads_android
 
+import android.annotation.TargetApi
+import android.os.Build
 import android.util.Log
 import android.view.InputDevice
 import android.view.KeyEvent
@@ -43,6 +45,18 @@ class EventListener {
         supportedAxes.forEach {
             reportAxis(motionEvent, channel, it.axisId, it.invert)
         }
+        return true
+    }
+
+    @TargetApi(Build.VERSION_CODES.S)
+    fun onBatteryEvent(device: InputDevice, channel: MethodChannel): Boolean {
+        val arguments = mapOf(
+            "gamepadId" to device.getId().toString(),
+            "time" to System.currentTimeMillis(),
+            "type" to "battery",
+            "value" to device.batteryState.status
+        )
+        channel.invokeMethod("onGamepadEvent", arguments)
         return true
     }
 
