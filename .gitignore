@@ -5,3 +5,7 @@ pubspec.lock
 pubspec_overrides.yaml
 cmake-build-debug/
 .vs/
+packages/gamepads_android/android/gradlew.bat
+packages/gamepads_android/android/gradlew
+packages/gamepads_android/android/gradle/wrapper/gradle-wrapper.jar
+packages/gamepads_android/android/gradle/wrapper/gradle-wrapper.properties

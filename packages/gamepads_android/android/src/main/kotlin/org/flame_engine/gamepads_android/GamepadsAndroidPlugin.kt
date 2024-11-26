@@ -77,6 +77,13 @@ class GamepadsAndroidPlugin: FlutterPlugin, MethodCallHandler, ActivityAware {
         false
       }
     }
+    compatibleActivity.registerBatteryEventHandler { device ->
+      if (devices.containsKey(device.id)) {
+        events.onBatteryEvent(device, channel)
+      } else {
+        false
+      }
+    }
   }
 
   override fun onDetachedFromActivity() {
