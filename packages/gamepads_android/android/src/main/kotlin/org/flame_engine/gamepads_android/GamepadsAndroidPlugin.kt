@@ -16,7 +16,10 @@ import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler
 import io.flutter.plugin.common.MethodChannel.Result
+
 import kotlin.concurrent.thread
+import android.os.Handler
+import android.os.Looper
 
 class GamepadsAndroidPlugin: FlutterPlugin, MethodCallHandler, ActivityAware {
   companion object {
@@ -89,12 +92,17 @@ class GamepadsAndroidPlugin: FlutterPlugin, MethodCallHandler, ActivityAware {
     batteryThread = thread {
       while (true) {
         devices.getDevices().forEach { device ->
-          events.onBatteryEvent(device.value, channel)
+          mainHandler.post {
+            events.onBatteryEvent(device.value, channel)
+          }
         }
         Thread.sleep(5000)
       }
     }
   }
+
+  // Create a handler associated with the main thread
+  private val mainHandler = Handler(Looper.getMainLooper())
 
   //store the thread in a variable so we can stop it when the activity is detached
   private var batteryThread: Thread? = null
