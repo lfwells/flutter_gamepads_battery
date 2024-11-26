@@ -13,6 +13,9 @@ class GamepadState {
   /// Contains inputs from events where [GamepadEvent.type] is [KeyType.button].
   final Map<String, bool> buttonInputs = {};
 
+  /// Contains current battery level
+  double batteryLevel = 1.0;
+
   /// Updates the state based on the given event.
   void update(GamepadEvent event) {
     switch (event.type) {
@@ -21,6 +24,9 @@ class GamepadState {
         break;
       case KeyType.button:
         buttonInputs[event.key] = event.value != 0;
+        break;
+      case KeyType.battery:
+        batteryLevel = event.value;
         break;
     }
   }

@@ -10,6 +10,9 @@ enum KeyType {
   ///
   /// They represent the face buttons, system buttons, and back bumpers, etc.
   button,
+
+  /// Represents a battery event
+  battery,
 }
 
 /// Represents a single "input" listened from a gamepad, i.e. a particular
