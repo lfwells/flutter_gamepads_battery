@@ -18,7 +18,12 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  gamepads_platform_interface: ^0.1.2+1
+  gamepads_platform_interface:
+    git:
+      url: https://github.com/lfwells/flutter_gamepads_battery.git
+      ref: main
+      path: packages/gamepads_platform_interface
+
 
 dev_dependencies:
   flame_lint: ^0.2.0
