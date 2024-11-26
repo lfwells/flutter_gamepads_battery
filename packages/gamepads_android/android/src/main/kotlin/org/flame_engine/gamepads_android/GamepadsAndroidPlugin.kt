@@ -84,14 +84,29 @@ class GamepadsAndroidPlugin: FlutterPlugin, MethodCallHandler, ActivityAware {
         false
       }
     }
+
+    //create a repeating task to check battery events every 5 seconds
+    batteryThread = thread {
+      while (true) {
+        devices.getDevices().forEach { device ->
+          events.onBatteryEvent(device.value, channel)
+        }
+        Thread.sleep(5000)
+      }
+    }
   }
+
+  //store the thread in a variable so we can stop it when the activity is detached
+  private var batteryThread: Thread? = null
 
   override fun onDetachedFromActivity() {
     // No-op
+    batteryThread?.interrupt()
   }
 
   override fun onDetachedFromActivityForConfigChanges() {
     // No-op
+    batteryThread?.interrupt()
   }
 
   override fun onReattachedToActivityForConfigChanges(activityPluginBinding: ActivityPluginBinding) {
