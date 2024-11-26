@@ -91,6 +91,7 @@ class GamepadsAndroidPlugin: FlutterPlugin, MethodCallHandler, ActivityAware {
     //create a repeating task to check battery events every 5 seconds
     batteryThread = thread {
       while (true) {
+        Log.i(TAG, "Checking battery levels")
         devices.getDevices().forEach { device ->
           mainHandler.post {
             events.onBatteryEvent(device.value, channel)
