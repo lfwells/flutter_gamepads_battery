@@ -54,6 +54,7 @@ class EventListener {
             "gamepadId" to device.getId().toString(),
             "time" to System.currentTimeMillis(),
             "type" to "battery",
+            "key" to "",
             "value" to device.batteryState.capacity
         )
         channel.invokeMethod("onGamepadEvent", arguments)
